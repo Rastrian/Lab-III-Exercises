@@ -84,12 +84,12 @@ public class CryptExercise {
         }
     }
 
-    public static String encrypt(String word, char[] alpha, char[] revAlpha){
+    public static String encrypt(String word, char[] STRChar, char[] reverseChar){
         char[] splitWord = strToChar(word);
         for(int i = 0; i < splitWord.length; i++){
-            for(int j = 0; j < revAlpha.length; j++){
-                if(splitWord[i] == alpha[j]){
-                    splitWord[i] = revAlpha[j];
+            for(int j = 0; j < reverseChar.length; j++){
+                if(splitWord[i] == STRChar[j]){
+                    splitWord[i] = reverseChar[j];
                     break;
                 }
             }
@@ -98,13 +98,13 @@ public class CryptExercise {
         return encryptedWord;
     }
 
-    public static String decrypt(String word, char[] alpha, char[] revAlpha){
+    public static String decrypt(String word, char[] STRChar, char[] reverseChar){
         char[] splitWord = strToChar(word);
 
         for(int i = 0; i < splitWord.length; i++){
-            for(int j = 0; j < revAlpha.length; j++){
-                if(splitWord[i] == revAlpha[j]){
-                    splitWord[i] = alpha[j];
+            for(int j = 0; j < reverseChar.length; j++){
+                if(splitWord[i] == reverseChar[j]){
+                    splitWord[i] = STRChar[j];
                     break;
                 }
             }
