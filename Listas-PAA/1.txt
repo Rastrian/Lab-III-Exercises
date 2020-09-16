@@ -1,0 +1,25 @@
+Nome = Luis Gustavo Vaz
+Matricula = 660924
+
+Exercicio 2:
+
+36, 59, CD, 51, 95, AB, 63, 42, 13, 73 
+
+36, 59, 09, 51, 95, 66, 63, 42, 13, 73 
+
+      51                      66
+09 13    36 42  51 59   59 63    73 95
+
+Ultima Pagina (66): 59 63 73 95
+
+Exercicio 3:
+
+f(x)=(x^3) % 53
+
+Código	Nome	                Nacionalidade       Bytes           Arq
+04	    Anne-Marie Löwinder	    SWE                 4+(22*2)=48     11
+44	    Ada Lovelace	        ENG                 4+(15*2)=34     13
+11	    Qiheng Hu	            CHI                 4+(12*2)=28     06
+65	    Karen Spärck Jones	    ENG                 4+(21*2)=26     32
+20	    Barbara Liskov	        USA                 4+(17*2)=38     50
+24      Luis Vaz                BRA                 4+(10*2)=20     44
