@@ -1,1 +1,0 @@
-# Ordenação externa de arquivos
