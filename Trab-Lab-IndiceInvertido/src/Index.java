@@ -20,8 +20,8 @@ public class Index {
 
     public Index() throws IOException {
         dictionary = new TreeMap<String, Event>();
-        fileList = getFilesList();
-        stopwords = getStopWords();
+        fileList = (fileList == null ? getFilesList() : fileList);
+        stopwords = (stopwords == null ? getStopWords() : stopwords);
 
         if (new File(fileName).exists()) {
             startIndex();
@@ -105,11 +105,11 @@ public class Index {
                                 if (dictionary.containsKey(temp)) {
                                     if (!dictionary.get(temp).verifyEvent(i+1)) {
                                         dictionary.get(temp).saveEvent(i+1);
-                                    } else {
-                                        dictionary.put(temp, new Event(i+1));
-                                        eventAmount++;
                                     }
-                                }
+                                } else {
+                                    dictionary.put(temp, new Event(i+1));
+                                    eventAmount++;
+                                }     
                             }
                         } 
                     }
@@ -119,5 +119,32 @@ public class Index {
             }
         }
         saveFile();
+    }
+
+    public ArrayList<String> searchEvent(String line) {
+        ArrayList<String> searchList = new ArrayList<String>();
+        StringTokenizer parser;
+        String aux;
+
+        line = line.toLowerCase();
+        parser = new StringTokenizer(line, "\" . ,() * / \\ = - + : ; —  |");
+    
+        while (parser.hasMoreTokens()) {
+            aux = parser.nextToken().toLowerCase();
+
+            if (!stopwords.contains(aux)) {
+                if (!searchList.contains(aux)) {
+                    searchList.add(aux);
+                }
+            }
+        }
+    
+        for (String s : searchList) {
+            boolean result = dictionary.containsKey(s);
+            System.out.println(result == true ? "A palavra (" + s + ") existe nos arquivos "
+            + dictionary.get(s).returnEvents().toString() : "A palavra ("+s+") não existe em nenhum dos arquivos encontrados.");
+        }
+
+        return searchList;
     }
 }
