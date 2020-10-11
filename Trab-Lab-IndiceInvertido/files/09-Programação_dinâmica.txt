@@ -1,0 +1,310 @@
+
+Programação dinâmica
+Origem: Wikipédia, a enciclopédia livre.
+
+
+Programação dinâmica é um método para a construção de algoritmos para a resolução de problemas computacionais, em especial os de otimização
+combinatória.[1]Ela é aplicável a problemas nos quais a solução ótima pode ser computada a partir da solução ótima previamente calculada e memorizada -
+de forma a evitar recálculo - de outros subproblemas que, sobrepostos, compõem o problema original.
+
+O que um problema de otimização deve ter para que a programação dinâmica seja aplicável são duas principais características: subestrutura ótima e
+superposição de subproblemas[2]. Um problema apresenta uma subestrutura ótima quando uma solução ótima para o problema contém em seu interior
+soluções ótimas para subproblemas. A superposição de subproblemas acontece quando um algoritmo recursivo reexamina o mesmo problema muitas vezes.
+
+Problemas de programação dinâmica podem ser abordados de forma top-down ou bottom-up.
+
+Índice
+      1 Abordagens Top-Down e Bottom-up
+            1.1 Top Down
+            1.2 Bottom Up
+      2 Exemplos
+            2.1 Exemplo 1: Sequência de Fibonacci
+            2.2 Exemplo 2: Multiplicação de Cadeia de Matrizes[3]
+                  2.2.1 Problema
+                  2.2.2 Solução
+                  2.2.3 Conclusão
+            2.3 Implementação em Java
+      3 Referências
+      4 Veja também
+      5 Links externos
+
+Abordagens Top-Down e Bottom-up[editar | editar código-fonte]
+Top Down[editar | editar código-fonte]
+
+Como os próprios nomes sugerem, a abordagem top-down aborda o problema de forma recursiva comum, ou seja, no exemplo do algoritmo de Fibonacci
+(mais abaixo), começamos pelo n-ésimo número e em, recursivamente, ir calculando os valores de F[ n-1 ], F[ n-2 ], F[ n-3 ],..., F[ 2 ], F[ 1 ]. Nesta
+abordagem, os valores são armazenados em uma tabela e, para a i-ésima iteração, verifica-se se F[ i ] já foi calculado.
+
+Bottom Up[editar | editar código-fonte]
+
+Na abordagem bottom-up, vamos calculando os subproblemas menores e aumentando a complexidade com o passar do tempo, ou seja, para o exemplo de
+Fibonacci, começaríamos calculando F[ 1 ], depois F[ 2 ], F[ 3 ], e assim por diante até F[ n ]. Observe que, nesta abordagem, na nós sabemos que, na i-
+ésima iteração, F[ i-1 ] já foi resolvido, logo não precisamos verificar toda vez como na top-down. Ao consultar o exemplo 1, do Algoritmo de Fibonacci, isso
+deve ficar mais claro.
+
+Em geral, ambas as abordagens tem o mesmo tempo assintótico de execução[carece de fontes?].
+
+Exemplos[editar | editar código-fonte]
+Exemplo 1: Sequência de Fibonacci[editar | editar código-fonte]
+
+Como exemplo simples de programação dinâmica, com alguma frequência, alguns textos, utilizam a determinação recursiva daSequência de Fibonacci.
+
+
+
+
+Quando implementada de forma recursiva sem maiores cuidados e sem memorização, a dupla chamada a F na segunda linha causa a necessidade da
+repetição de cálculos, que faz com que o tempo cresça exponencialmente.
+
+Para implementar em PD, tem-se os seguintes pseudocódigos:
+
+ALGORITMO FIBONACCI-TOPDOWN(n)
+  Criar vetor F com n posicoes, iniciando em 1
+  F[1] = 1
+  F[2] = 2
+
+  Para i = 3 até n faça
+    F[i] = -1
+
+  retorne FIBONACCI-RECURSIVO-TOPDOWN(N)
+FIM
+
+Esse primeiro irá inicializar as posições 1 e 2 com o valor 1 e o resto com "-1". Esse primeiro algoritmo somente cria e inicializa o vetor, e ao final chama o
+algoritmo que de fato irá calcular os valores de Fibonacci:
+
+ALGORITMO FIBONACCI-RECURSIVO-TOPDOWN(n)
+  se F[n] > 0 entao
+    retorne F[n]
+
+  F[n] = FIBONACCI-RECURSIVO-TOPDOWN(n - 1) + FIBONACCI-RECURSIVO-TOPDOWN(n - 2)
+  retorne F[n]
+FIM
+
+Este segundo algoritmo, a princípio, irá ir até a posição 1 e 2 e, então, somar o valor de ambas (1 + 1). Em segunda, o algoritmo recursivo irá adicionar esse
+valor ào valor da posição 3. Observe que, ao tentar calcular F[3], o algoritmo irá calcular F[1] e F[2], mas F[1] e F[2] já foram calculados, e a primeira linha do
+pseudocódigo verifica se F[n] já existe e, caso seja verdadeiro, irá apenas retornar seu valor. Com isso, o tempo de execução será Θ(n).
+
+Exemplo 2: Multiplicação de Cadeia de Matrizes[3][editar | editar código-fonte]
+
+Imaginemos o processo de multiplicação de matrizes                                   com dimensões                                          ,
+respectivamente. O problema em essência é trivial, pois se multiplicarmos sequencialmente as matrizes obteremos facilmente o resultado esperado.
+
+É interessante lembrar que a multiplicação de matrizes não é comutativa (em geral,                          ), mas associativa, o que significa que
+                                .
+
+O maior desafio que reside neste problema é, então, otimizar o desempenho do programa que o resolve, ou seja, aproveitar-se da propriedade associativa
+para encontrar a ordem ótima de se realizar a multiplicação das matrizes, de modo que o número de multiplicações escalares seja mínimo.
+
+Podemos observar que, em geral, multiplicar uma matriz              por uma matriz             exige           operações de multiplicação. As matrizes são
+multiplicadas aos pares.
+
+Problema[editar | editar código-fonte]
+
+Multiplicar                                   com dimensões              ,       ,             e       , respectivamente. Quantas multiplicações são realizadas
+nessa sequência?
+
+Vamos exemplificar algumas maneiras de realizarmos esta operação:
+
+                                   Organização dos
+                                                                        Computação do custo                                    Custo
+                                   parênteses
+
+
+
+
+Como podemos observar, a ordem da multiplicação faz uma grande diferença no tempo de execução final.
+
+Solução[editar | editar código-fonte]
+
+Para resolver este problema, tudo que precisamos é saber qual o melhor índice tal que
+onde varia de 1 até (n−1).
+
+Note que esse problema foi decomposto em dois subproblemas. Mais precisamente defina                     como o número mínimo de multiplicações (ou o custo
+mínimo) para realizar o produto                       .
+
+Portanto,
+
+                                                                    ,
+
+onde     varia de i até (j -1), fornece o custo mínimo de multiplicações. Daí, note que:
+
+
+
+                                           é o número mínimo de operações para realizar dei até ;
+                                                  é o número mínimo de operações para realizar de                    até j ;
+                    é o número mínimo de operações para realizar esse produto.
+
+
+Esta expressão constitui uma recorrência típica do método de programação dinâmica. Ela sugere um algoritmo recursivo, mas, uma implementação “bottom
+up” (de baixo para cima) é mais eficiente. Um algoritmo nesta fórmula tem os seguintes passos iterativos:
+
+   1. Os          são calculados para               . Claramente,             ;
+   2. Os              são calculados para                    ;
+   3. Os              são calculados para                    ; e assim por diante
+
+Assim, vamos aplicar o algoritmo acima para resolver o exemplo dado anteriormente. Observe que devemos calcular o custo mínimo na ordem crescente da
+diferença entre i e j . Então, no primeiro passo iterativo, a diferença entrei e j é zero, pois, , o que implica:
+
+                                                         .
+
+No segundo passo, temos i - j = 1, logo,
+
+
+
+
+No terceiro passo, j - i = 2 e com isso, o   varia de 1 a 2. Utilizando a fórmula recursiva:
+Para      variando de 2 a 3 temos:
+
+
+
+No último passo, j − i = 3 e com isso, o                            .
+
+
+
+Por fim, a solução ótima:
+
+                                                                        operações.
+
+Conclusão[editar | editar código-fonte]
+
+Tentar todas as ordens possíveis de multiplicações para avaliar o produto de matrizes é um processo ordem exponencial em .
+
+Usando programação dinâmica é possível resolver este problema na ordem polinomial, ou seja         .
+
+Implementação em Java[editar | editar código-fonte]
+package Classes;
+/**
+ *
+ *
+ */
+public class Matriz {
+    /*Atributos da classe*/
+    /*string: atributo que recebe os dados de saída de printOptmalParents()
+    * para poder exibir o resultado da parentização. */
+    private static String string;
+    /*m: atributo que recebe os valores das multiplicações feitas para o melhor custo*/
+    private int m[][];
+    /*s: atributo que recebe o valor das posições de melhor multiplicação*/
+    private int s[][];
+    /*linhas: recebe o valor total das linhas das matrizes.*/
+    private int linhas;
+    /*colunas: recebe o valor total das colunas das matrizes*/
+    private int colunas;
+    /*inicoMatriz: atributo tipo flag, para marcar a inicialização de matrizes
+    * no método recursiveMatrixChain(int p[], int i, int j)*/
+    private boolean inicioMatriz;
+    /*Métodos geters e setters para entrada e saída de dados nos atributos*/
+    public int[][] getM() {
+        return m;
+    }
+    public void setM(int[][] m) {
+        this.m = m;
+    }
+    public int[][] getS() {
+        return s;
+    }
+    public void setS(int[][] s) {
+        this.s = s;
+    }
+    public int getLinhas() {
+        return linhas;
+    }
+    public void setLinhas(int linhas) {
+        this.linhas = linhas;
+    }
+    public int getColunas() {
+        return colunas;
+    }
+    public void setColunas(int colunas) {
+        this.colunas = colunas;
+    }
+    public Matriz() {
+        string = "";
+    }
+    /*Métodos da Classe*/
+    /* Método para calcular o melhor custo.
+     *Parametros: p é um vetor com as posições das matrizes.
+     *Retorno: int[][].*/
+    public static int[][] MatrixChainOrder(int p[]) {
+        int retorno[][] = new int[p.length - 1][p.length - 1];
+        try {
+           int i = 0; //linhas
+           int j = 0; //colunas
+           int k = 0;
+           int q = 0;
+           int infinito = Integer.MAX_VALUE; // tipo infinito positivo (para simular o infinito)
+           int n = p.length - 1;
+           int m[][] = new int[n][n]; // ixj
+           int s[][] = new int[n][n];
+           for (i = 0; i < n; i++) {
+               m[i][i] = 0;
+           }
+           for (int l = 1; l < n; l++) {
+               for (i = 0; i < n - l; i++) {
+                  j = i + l;
+                  m[i][j] = infinito;
+                  for (k = i; k < j; k++) {
+                      q = m[i][k] + m[k + 1][j] + p[i] * p[k + 1] * p[j + 1];
+                      if (q < m[i][j]) {
+                          m[i][j] = q;
+                          s[i][j] = k + 1;
+                   }
+               }
+            }
+         }
+         retorno = s;
+      } catch (Exception e) {
+         System.out.println("Erro: " + e);
+         e.printStackTrace();
+      }
+      return retorno;
+    }
+    /*Método para alocar os parênteses de uma forma ótima para a multiplicação.
+     *Parâmetros: s é a matriz que contém as posições de melhor multiplicação;
+     *           i é o índice inicial;
+     *           j é o índice final.
+     *Retorno: String.*/
+    public String printOptmalParents(int s[][], int i, int j) {
+       if (i == j) {
+           this.string += "A" + (i + 1) + " ";
+       } else {
+           this.string += " ( ";
+           printOptmalParents(s, i, s[i][j] - 1);
+           printOptmalParents(s, s[i][j], j);
+           this.string += " ) ";
+       }
+       return this.string;
+    }
+    /*Método para inicializar os atributos da classe que serão utilizados em métodos.
+     *Parâmetros: p é um vetor com as posições das matrizes.
+     *Retorno: não há.*/
+    public void inicializaRecursiveMatrixChain(int p[]) {
+       int n = p.length - 1;
+       this.m = new int[n][n]; // ixj
+       this.s = new int[n][n];
+       this.inicioMatriz = true;
+    }
+    /*Método para calcular o melhor custo; porém com chamadas recursivas.
+     *Parâmetros: p é um vetor com as posições das matrizes;
+     *           i é o índice inicial;
+     *           j é o índice final.
+     *Retorno: int.*/
+    public int recursiveMatrixChain(int p[], int i, int j) {
+       int retorno = 0;
+       if (this.inicioMatriz) {
+           if (i == j) {
+               retorno = 0;
+           } else {
+               this.m[i][j] = Integer.MAX_VALUE;
+               for (int k = i; k <= j - 1; k++) {
+                   int q = recursiveMatrixChain(p, i, k) + recursiveMatrixChain(p, k + 1, j) + p[i] * p[k + 1] * p[j + 1];
+                   if (q < this.m[i][j]) {
+                       this.m[i][j] = q;
+                       this.s[i][j] = k + 1;
+                   }
+               }
+               retorno = this.m[i][j];
+           }
+       }
+       return retorno;
+    }
+}

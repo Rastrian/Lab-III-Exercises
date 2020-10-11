@@ -1,0 +1,35 @@
+****** Primeiro HD com capacidade de petabytes deve ser feito de... vidro
+******
+ Por Ramon_de_Souza | 21 de Setembro de 2020 às 22h20
+ Microsoft
+
+Se você ainda não passou por isso, um dia passará: compramos aquele HD de 1 TB
+acreditando ser a resolução de todos os nossos problemas, e, depois de um ano
+ou até mesmo alguns poucos meses, descobrimos que não se trata de tanto
+armazenamento assim. A tendência é que, com a reprodução de vídeos de altíssima
+qualidade e crescimento no setor de big data, a demanda por armazenamento só
+aumente.
+E é por isso que as grandes companhias de tecnologia já estão focadas em
+projetar soluções que nos permitam guardar bem mais arquivos sem
+necessariamente reservar mais espaço físico. A Microsoft pode ser considerada
+uma pioneira nesse ramo — ela mantém, desde 2019, o Project Silica, que propõe
+usar dióxido de silício para criar um dispositivo óptico de armazenamento de
+dados que fosse mais eficiente do que os discos tradicionais.
+O dióxido de silício, também conhecido popularmente como sílica, é o mineral
+mais abundante da crosta terrestre e principal componente da areia, além de ser
+matéria-prima para o vidro. O protótipo da Microsoft é, a grosso modo, um
+pedaço de vidro com 2,5 polegadas (mesmas dimensões de um HD portátil) com
+dados codificados internamente. Sua capacidade? 75,6 terabytes.
+Para ser uma ideia, o HD tradicional de maior capacidade disponível no mercado
+aguenta 20 TB e é bem maior, medindo 3,5 polegadas. John Morris, CTO da
+Seagate, concorda que o vidro é o futuro do armazenamento e sinalizou que sua
+equipe de pesquisa e desenvolvimento está trabalhando em formas de utilizar o
+material. “O desafio é desenvolver sistemas que possam ler e escrever com uma
+taxa de transferência razoável”, diz.
+De fato — por enquanto, os dispositivos de armazenamento óptico baseados em
+sílica são do tipo read-only (somente leitura), o que significa que os
+computadores só podem ler os dados que foram gravados no momento de sua
+fabricação, e não gravar novos arquivos em sua memória. Ademais, visto que
+ainda vai demorar para termos conexões de internet na faixa dos terabytes, tais
+trabalhos não precisam ser feitos com tanta pressa assim.
+Fonte: TechRadar
